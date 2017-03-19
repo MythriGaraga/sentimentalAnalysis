@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% block doc -%}
+<html>
+{%- block html %}
+  <head>
+    {%- block head %}
+    <title>{% block title %}Review Classification{% endblock title %}</title>
+
+    {%- block styles %}
+    <!-- Bootstrap -->
+    <link href="{{bootstrap_find_resource('css/bootstrap.css', cdn='bootstrap')}}" rel="stylesheet">
+    {%- endblock styles %}
+    {%- endblock head %}
+  </head>
+  <body class="panel panel-default">
+    {% block body -%}
+    {% block navbar %}
+        <div class="panel-heading">
+            <h1 align="center">Polarity Prediction</h1>
+        </div>
+    {%- endblock navbar %}
+    {% block content -%}
+    <div class="panel-body text-center">
+        <h2>Please enter your review:</h2>
+        {% from "_formhelpers.html" import render_field %}
+        <form method=post action="/results">
+        <dl>
+           {{ render_field(form.moviereview, cols='60', rows='10') }}
+         </dl>
+            <div class ="col-xs-8"></div>
+           <div class="col-xs-2">
+            <button type=submit value='Submit review' name='submit_btn' class = "btn btn-block btn-primary btn-small" >Submit</button>
+           </div>
+
+        </form>
+    </div>
+    {%- endblock content %}
+    {%- endblock body %}
+  </body>
+{%- endblock html %}
+</html>
+{% endblock doc -%}

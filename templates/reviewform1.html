@@ -1,0 +1,62 @@
+<!doctype html>
+<html ng-app="MainApp">
+<head>
+<title>Movie Classification</title>
+<script src="/static/js/angular.min.js"></script>
+<script>
+    var app = angular.module("MainApp",[])
+
+    app.service("reviewService",function($http){
+
+        var reviewObj = {
+				putMethod : function(){
+					return $http.post("http://127.0.0.1:5000/results");
+				}
+		}
+		return reviewObj;
+
+    })
+    app.controller("formCtrl",function($scope,$http,reviewService){
+        $scope.submit = function(){
+            console.log("in submit")
+            reviewService.putMethod();
+            }
+    })
+
+
+</script>
+</head>
+<body>
+<div>
+<h2>Please enter your movie review:</h2>
+    <form >
+         <div>
+             <input type = "text" ng-model="form.moviereview">
+             <button ng-click="submit()">Submit</button>
+        </div>
+</form>
+</div>
+
+<div>
+<h3>Your movie review:</h3>
+    <div>{{ content }}</div>
+    <h3>Prediction:</h3>
+    <div>This movie review is <strong>{{ prediction }}</strong>
+    (probability: {{ probability }}%).</div>
+    <div id='button'>
+    <form>
+        <input type=submit value='Correct' name='feedback_button'>
+        <input type=submit value='Incorrect' name='feedback_button'>
+        <input type=hidden value='{{ prediction }}' name='prediction'>
+        <input type=hidden value='{{ content }}' name='review'>
+    </form>
+    </div>
+<div id='button1'>
+    <form action="/">
+<input type=submit value='Submit another review'>
+</form>
+</div>
+
+</div>
+</body>
+</html>

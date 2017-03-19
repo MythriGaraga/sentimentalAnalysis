@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+{% block doc -%}
+<html>
+{%- block html %}
+  <head>
+    {%- block head %}
+    <title>{% block title %}Review Classification{% endblock title %}</title>
+
+    {%- block styles %}
+    <!-- Bootstrap -->
+    <link href="{{bootstrap_find_resource('css/bootstrap.css', cdn='bootstrap')}}" rel="stylesheet">
+    {%- endblock styles %}
+    {%- endblock head %}
+  </head>
+  <body class="panel panel-default">
+    {% block body -%}
+    {% block navbar %}
+        <div class="panel-heading">
+            <h1 align="center">Polarity Prediction</h1>
+        </div>
+    {%- endblock navbar %}
+    {% block content -%}
+    <div class="panel-body text-center">
+        <h3>Your review:</h3>
+        <div>{{ content }}</div>
+        <h3>Prediction:</h3>
+        <div>This review is <strong>{{ prediction }}</strong>
+            (probability: {{ probability }}%).</div>
+         <div id='button'>
+             <form action="/thanks" method="post">
+                 <div class="col-xs-4"></div>
+                 <div class="col-xs-2" style="padding-top: 30px";>
+                    <button type=submit value='Correct' name='feedback_button' class = "btn btn-block btn-success btn-small">Correct</button>
+                 </div>
+                 <div class="col-xs-2" style="padding-top: 30px";>
+                    <button type=submit value='Incorrect' name='feedback_button' class = "btn btn-block btn-danger btn-small">Incorrect</button>
+                 </div>
+                 <div class="col-xs-2"></div>
+                 <input type=hidden value='{{ prediction }}' name='prediction'>
+                 <input type=hidden value='{{ content }}' name='review'>
+             </form>
+         </div>
+        <div class="col-xs-10"></div>
+        <div class="col-xs-5"></div>
+         <div class="col-xs-3" style="padding-top: 30px";>
+             <form action="/">
+                 <button type=submit value='Submit review' name='submit_btn' class = "btn btn-block btn-primary btn-small" >Submit another review</button>
+             </form>
+         </div>
+    </div>
+    {%- endblock content %}
+    {%- endblock body %}
+  </body>
+{%- endblock html %}
+</html>
+{% endblock doc -%}
