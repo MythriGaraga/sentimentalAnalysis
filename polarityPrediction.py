@@ -1,6 +1,7 @@
 import uuid
 import os
 import re
+import random
 import numpy as np
 from flask import *
 from sklearn.feature_extraction.text import CountVectorizer
@@ -23,7 +24,7 @@ class db_entry(db.Model):
     sentiment = db.Column(db.Integer())
 
     def __init__(self, review, y):
-        self.id = uuid.uuid4()
+        self.id = random.randint(0,999999999)
         self.review = review
         self.sentiment = y
 
