@@ -1,4 +1,5 @@
 import uuid
+import os
 import re
 import numpy as np
 from flask import *
@@ -9,7 +10,8 @@ from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/Mythri'
+if os.environ.get('DATABASE_URL') is None:
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://lmkelnkxzrigla:12927358b9e4f6c39b4c10945c12bf1b9436ed46863b40ba97605a0369560027@ec2-54-163-253-94.compute-1.amazonaws.com:5432/d48tntb1bnfgag'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 Bootstrap(app)
