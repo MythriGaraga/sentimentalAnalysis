@@ -104,11 +104,9 @@ def results():
         review = request.form['moviereview']
         print review
         y, proba = classify(review)
-        print y,proba
         return render_template('results.html',
                                 content=review,
-                                prediction=y,
-                               probability=round(proba * 100, 2))
+                                prediction=y)
     return render_template('reviewform.html', form=form)
 
 id = 0
